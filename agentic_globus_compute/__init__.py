@@ -21,7 +21,7 @@ def get_remote_endpoint_id() -> str:
 
 
 def globus_compute_executor(
-    endpoint_id: str,
+    endpoint_id: str | None = None,
 ) -> Callable[..., Callable[..., Any]]:
     """Run a function remotely using Globus Compute.
 
@@ -29,8 +29,9 @@ def globus_compute_executor(
 
     Parameters
     ----------
-    endpoint_id : str
-        The endpoint ID to use for the Globus Compute Executor.
+    endpoint_id : str | None
+        The endpoint ID to use for the Globus Compute Executor. If None,
+        the function will be executed locally.
 
     Returns
     -------
@@ -40,6 +41,14 @@ def globus_compute_executor(
 
     def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
+            # If the endpoint ID is not provided, run the function locally
+            if endpoint_id is None:
+                print(
+                    f"Running function '{func.__name__}' locally "
+                    f'with args={args} kwargs={kwargs}',
+                )
+                return func(*args, **kwargs)
+
             with Executor(endpoint_id=endpoint_id) as gce:
                 print(
                     f"Submitting function '{func.__name__}' "
