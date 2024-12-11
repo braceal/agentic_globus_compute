@@ -2,6 +2,11 @@
 
 HPC function calling for agentic workflows with Globus Compute.
 
+## Installation
+
+```console
+pip install git+https://github.com/braceal/agentic_globus_compute.git
+```
 
 ## Contributing
 
