@@ -24,6 +24,7 @@ class VLLMGenerator:
         max_tokens: int = 500,
         tensor_parallel_size: int = 1,
         gpu_memory_utilization: float = 0.9,
+        max_seq_len_to_capture: int = 45000,
         enforce_eager: bool = True,
     ) -> None:
         """Initialize the VLLMGenerator.
@@ -46,6 +47,8 @@ class VLLMGenerator:
             The number of GPUs to use, by default 1
         gpu_memory_utilization : float, optional
             percentage of gpu to utilize, by default 0.9
+        max_seq_len_to_capture : int, optional
+            The maximum sequence length to capture, by default 45000
         enforce_eager : bool, optional
             no cuda graph, by default True
         """
@@ -75,6 +78,7 @@ class VLLMGenerator:
             dtype='bfloat16',
             tensor_parallel_size=tensor_parallel_size,
             gpu_memory_utilization=gpu_memory_utilization,
+            max_seq_len_to_capture=max_seq_len_to_capture,
             enforce_eager=enforce_eager,
         )
 
@@ -130,6 +134,7 @@ def run_vllm(
     max_tokens: int = 500,
     tensor_parallel_size: int = 1,
     gpu_memory_utilization: float = 0.9,
+    max_seq_len_to_capture: int = 45000,
     enforce_eager: bool = True,
 ) -> list[str]:
     """Run the VLLM model to generate text from prompts.
@@ -154,6 +159,8 @@ def run_vllm(
         The number of GPUs to use, by default 1
     gpu_memory_utilization : float, optional
         percentage of gpu to utilize, by default 0.9
+    max_seq_len_to_capture : int, optional
+        The maximum sequence length to capture, by default 45000
     enforce_eager : bool, optional
         no cuda graph, by default True
 
@@ -181,6 +188,7 @@ def run_vllm(
         max_tokens=max_tokens,
         tensor_parallel_size=tensor_parallel_size,
         gpu_memory_utilization=gpu_memory_utilization,
+        max_seq_len_to_capture=max_seq_len_to_capture,
         enforce_eager=enforce_eager,
     )
 
