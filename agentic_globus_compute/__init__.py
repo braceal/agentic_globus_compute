@@ -2,10 +2,22 @@
 
 from __future__ import annotations
 
+import os
 from typing import Any
 from typing import Callable
 
 from globus_compute_sdk import Executor
+
+
+def get_remote_endpoint_id() -> str:
+    """Get the remote endpoint ID from the environment.
+
+    Returns
+    -------
+    str
+        The remote endpoint ID, or an empty string if not found.
+    """
+    return os.environ.get('GC_ENDPOINT_ID') or ''
 
 
 def globus_compute_executor(

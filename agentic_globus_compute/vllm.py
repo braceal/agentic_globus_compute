@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 
+from agentic_globus_compute import get_remote_endpoint_id
 from agentic_globus_compute import globus_compute_executor
 
 
@@ -113,7 +114,12 @@ class VLLMGenerator:
         return responses
 
 
-@globus_compute_executor(endpoint_id=os.environ['VLLM_ENDPOINT_ID'])
+@globus_compute_executor(
+    endpoint_id=os.environ.get(
+        'VLLM_ENDPOINT_ID',
+        default=get_remote_endpoint_id(),
+    ),
+)
 def run_vllm(
     prompts: str | list[str],
     pretrained_model_name_or_path: str,

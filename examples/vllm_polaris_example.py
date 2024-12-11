@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import os
 
-from agentic_globus_compute.vllm import run_vllm
-
 if __name__ == '__main__':
     # Polaris endpoint ID
     os.environ['VLLM_ENDPOINT_ID'] = '1e4f9309-f8c0-45e4-aac6-f0cf39a87a42'
+
+    from agentic_globus_compute.vllm import run_vllm
 
     # Sample prompts.
     prompts = [
