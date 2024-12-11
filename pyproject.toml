@@ -17,6 +17,9 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
+    "globus-compute-sdk",
+    "vllm",
+    "parsl-object-registry @ git+https://github.com/braceal/parsl_object_registry.git",
 ]
 
 [project.urls]
@@ -27,6 +30,7 @@ repository = "https://github.com/braceal/agentic_globus_compute"
 
 [project.optional-dependencies]
 dev = [
+    "globus-compute-endpoint",
     "covdefaults>=2.2",
     "coverage",
     "mypy",
